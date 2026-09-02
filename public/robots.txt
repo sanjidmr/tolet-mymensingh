@@ -1,0 +1,27 @@
+# Robots.txt for ToLet Mymensingh (ময়মনসিংহ বাসা ও মেস ভাড়া)
+User-agent: *
+Allow: /
+Allow: /tolet
+Allow: /mess
+Allow: /hostel
+Allow: /sublet
+Allow: /tolet/*
+Allow: /mess/*
+Allow: /hostel/*
+Allow: /sublet/*
+Allow: /safety
+Allow: /faq
+Allow: /terms
+
+# Disallow private user accounts, dashboards, admin, and authentication pages
+Disallow: /dashboard
+Disallow: /dashboard/*
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /login
+Disallow: /register
+Disallow: /favorites
+Disallow: /auth/
+
+# Sitemap location
+Sitemap: https://toletmymensingh.com/sitemap.xml

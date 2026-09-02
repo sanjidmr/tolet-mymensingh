@@ -1,0 +1,6 @@
+{
+  "name": "ToLet Mymensingh",
+  "description": "ময়মনসিংহের বিশ্বস্ত ও আধুনিক রেন্টাল মার্কেটপ্লেস — বাসা, মেস, হোস্টেল ও সাবলেট খোঁজার সহজ প্ল্যাটফর্ম।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
