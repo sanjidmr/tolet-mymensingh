@@ -32,26 +32,38 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
   const { user, isAuthenticated } = useAuth();
   const navigate = useLegacyNavigate();
 
-  const [favorites, setFavorites] = useState<string[]>(() => {
-    if (typeof window === "undefined") return ["listing-1"];
-    try {
-      const saved = localStorage.getItem("tolet_favorites");
-      return saved ? JSON.parse(saved) : ["listing-1"];
-    } catch {
-      return ["listing-1"];
-    }
-  });
+  const [favorites, setFavorites] = useState<string[]>(["listing-1"]);
+  const [hasHydrated, setHasHydrated] = useState(false);
 
   const [isGuestPromptOpen, setIsGuestPromptOpen] = useState(false);
 
+  // Hydration-safe restore: localStorage must NOT be read inside the useState
+  // initializer because that also runs on the server. Save/restore favorites
+  // only after mount so the server-rendered HTML matches the client's first
+  // render (and the MobileNav/Header badges never cause a hydration mismatch).
   useEffect(() => {
     if (typeof window === "undefined") return;
+    try {
+      const saved = localStorage.getItem("tolet_favorites");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) setFavorites(parsed);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setHasHydrated(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !hasHydrated) return;
     try {
       localStorage.setItem("tolet_favorites", JSON.stringify(favorites));
     } catch (e) {
       console.error(e);
     }
-  }, [favorites]);
+  }, [favorites, hasHydrated]);
 
   useEffect(() => {
     if (isAuthenticated && user?.id) {

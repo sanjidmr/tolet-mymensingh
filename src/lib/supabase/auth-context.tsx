@@ -78,14 +78,7 @@ const DEMO_PROFILES: Record<UserRole, UserProfile> = {
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
-  const [profile, setProfile] = useState<UserProfile | null>(() => {
-    try {
-      const cached = localStorage.getItem('tolet_active_profile');
-      return cached ? JSON.parse(cached) : null;
-    } catch {
-      return null;
-    }
-  });
+  const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const isConfigured = isSupabaseConfigured();
 
@@ -158,6 +151,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => {
       subscription.unsubscribe();
     };
+  }, []);
+
+  // Hydration-safe demo profile restore: localStorage must not be read in the
+  // useState initializer because that also runs on the server. Restore any
+  // cached demo profile only after mount so the server HTML matches the
+  // client's first render (prevents React hydration mismatches in the header).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const cached = localStorage.getItem('tolet_active_profile');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (parsed?.id && parsed?.role) {
+          setProfile(parsed);
+        }
+      }
+    } catch {
+      // ignore malformed cache
+    }
   }, []);
 
   const signInWithEmail = async (email: string, password: string) => {

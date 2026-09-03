@@ -144,31 +144,15 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center gap-2 cursor-pointer group select-none shrink-0 text-left"
             aria-label="ToLet Mymensingh home"
           >
-            <div
+            {/* Brand logo (public/logo.png) */}
+            <img
+              src="/logo.png"
+              alt="ToLet Mymensingh"
               className={cn(
-                "h-9 w-9 sm:h-10 sm:w-10 rounded-xl flex items-center justify-center transition-colors shadow-sm",
-                onHero
-                  ? "bg-emerald-500 text-white shadow-emerald-500/30 group-hover:bg-emerald-400"
-                  : "bg-emerald-600 text-white group-hover:bg-emerald-700"
+                "h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.03] sm:h-12",
+                onHero ? "drop-shadow-[0_2px_10px_rgba(255,255,255,0.35)]" : "drop-shadow-sm"
               )}
-            >
-              <Building2 className="h-5 w-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1">
-                <span
-                  className={cn(
-                    "font-extrabold text-sm sm:text-base tracking-tight leading-none",
-                    theme.text
-                  )}
-                >
-                  {language === "bn" ? "টু-লেট ময়মনসিংহ" : "ToLet Mymensingh"}
-                </span>
-              </div>
-              <p className={cn("text-[9px] font-medium leading-tight mt-0.5", onHero ? "text-emerald-100/90" : "text-stone-500")}>
-                {language === "bn" ? "আপনার পরের বাসা খুঁজে নিন" : "Find Your Next Home"}
-              </p>
-            </div>
+            />
           </button>
 
           {/* Desktop nav links */}

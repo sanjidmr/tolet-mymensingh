@@ -156,10 +156,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
 
-        {/* Cinematic dark-green overlay (keeps headline readable, image still visible) */}
-        <div className="absolute inset-0 bg-emerald-950/25" />
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/65 via-emerald-950/35 to-emerald-900/5" />
-        <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/60 via-transparent to-emerald-950/20" />
+        {/* Cinematic dark-green overlay (very light — background image stays vivid) */}
+        <div className="absolute inset-0 bg-emerald-950/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/35 via-emerald-950/15 to-emerald-900/5" />
+        <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/25 via-transparent to-emerald-950/10" />
 
         {/* Subtle decorative arcs / glow (pure CSS, behind content) */}
         <div className="pointer-events-none absolute inset-0 opacity-40">
@@ -179,7 +179,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
 
           {/* Hero Headline - centered editorial */}
-          <h1 className="hero-fade-up-1 max-w-3xl mx-auto text-center text-[clamp(1.9rem,5.4vw,4.4rem)] font-black leading-[1.12] tracking-tight text-white">
+          <h1 className="hero-fade-up-1 max-w-3xl mx-auto text-center text-[clamp(1.9rem,5.4vw,4.4rem)] font-black leading-[1.12] tracking-tight text-white [text-shadow:0_2px_14px_rgba(6,45,44,0.55),0_1px_3px_rgba(6,45,44,0.35)]">
             {language === 'bn' ? (
               <>
                 ময়মনসিংহে
@@ -200,7 +200,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </h1>
 
           {/* Hero Description */}
-          <p className="hero-fade-up-2 mt-4 max-w-[560px] mx-auto text-center text-sm leading-relaxed text-white/80 sm:text-base">
+          <p className="hero-fade-up-2 mt-4 max-w-[560px] mx-auto text-center text-sm leading-relaxed text-white [text-shadow:0_1px_8px_rgba(6,45,44,0.6)] sm:text-base">
             {language === 'bn' 
               ? 'গাঙ্গিনার পাড়, চরপাড়া, নতুন বাজার, মাসকান্দা ও মেডিকেল কলেজ এলাকাসহ সব জায়গায় যাচাই করা বাসা, মেস ও হোস্টেল।' 
               : 'Verified apartments, student messes and hostels across Gagina Bar, Charpara, Notun Bazar, Maskanda & more.'}
