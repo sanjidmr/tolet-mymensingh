@@ -97,7 +97,7 @@ export const AdminAreasView: React.FC<AdminAreasViewProps> = ({ onNavigate }) =>
       slug: area.slug,
       description_bn: area.description_bn || '',
       description_en: area.description_en || '',
-      is_popular: area.is_popular,
+      is_popular: area.is_popular ?? false,
     });
   };
 
@@ -251,7 +251,7 @@ export const AdminAreasView: React.FC<AdminAreasViewProps> = ({ onNavigate }) =>
               {/* Action Toolbar */}
               <div className="flex items-center justify-between pt-3 border-t border-stone-100">
                 <button
-                  onClick={() => handleTogglePopular(area.id, area.is_popular)}
+                  onClick={() => handleTogglePopular(area.id, area.is_popular ?? false)}
                   className={`text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors ${
                     area.is_popular ? 'text-amber-600 hover:text-amber-700' : 'text-stone-400 hover:text-stone-700'
                   }`}

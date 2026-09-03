@@ -59,7 +59,9 @@ export const ListingsExplorerView: React.FC<ListingsExplorerViewProps> = ({
 
   // Read initial filter state from URL query parameters + initialFilters prop
   const [filters, setFilters] = useState<ListingFilterState>(() => {
-    const urlState = parseUrlFilters(window.location.search, defaultModeType);
+    const search =
+      typeof window !== "undefined" ? window.location.search : "";
+    const urlState = parseUrlFilters(search, defaultModeType);
     return {
       ...urlState,
       ...(initialFilters || {}),
@@ -508,7 +510,7 @@ export const ListingsExplorerView: React.FC<ListingsExplorerViewProps> = ({
                     : 'A network or server error occurred. Please try again.'}
                 </p>
                 <Button
-                  variant="primary"
+                  variant="default"
                   onClick={() => loadData(filters)}
                   className="bg-emerald-700 text-white rounded-xl"
                 >

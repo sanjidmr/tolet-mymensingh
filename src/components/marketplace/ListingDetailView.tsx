@@ -687,7 +687,9 @@ export const ListingDetailView: React.FC<ListingDetailViewProps> = ({
                       {listing.owner_name}
                     </span>
                     {(listing.is_owner_verified || listing.is_verified) && (
-                      <ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0" title="Verified Landlord" />
+                      <span title="Verified Landlord">
+                        <ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0" />
+                      </span>
                     )}
                   </div>
                   <p className="text-xs text-stone-600 mt-0.5">

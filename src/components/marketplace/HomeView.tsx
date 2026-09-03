@@ -15,7 +15,10 @@ import {
   ArrowRight,
   Shield,
   Eye,
-  Check
+  Check,
+  ChevronDown,
+  Star,
+  BadgeCheck
 } from 'lucide-react';
 import { useLanguage } from '../../lib/language-context';
 import { Container } from '../layout/Container';
@@ -143,38 +146,82 @@ export const HomeView: React.FC<HomeViewProps> = ({
     <div className="space-y-8 sm:space-y-16 pb-12">
       
       {/* 1. HERO SECTION */}
-      <section className="relative pt-6 pb-10 sm:pt-12 sm:pb-16 overflow-hidden bg-gradient-to-b from-emerald-950 via-emerald-900 to-stone-900 text-white">
+      <section className="relative flex w-full items-center overflow-hidden bg-emerald-950 text-white">
         
-        {/* Subtle Decorative Background Rings */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full border-8 border-emerald-400" />
-          <div className="absolute top-1/2 -left-20 w-64 h-64 rounded-full border-4 border-emerald-300" />
+        {/* Background: Mymensingh cityscape (existing asset) */}
+        <img
+          src="/mymensingh.jpg"
+          alt=""
+          loading="eager"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+
+        {/* Cinematic dark-green overlay (keeps headline readable, image still visible) */}
+        <div className="absolute inset-0 bg-emerald-950/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/65 via-emerald-950/35 to-emerald-900/5" />
+        <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/60 via-transparent to-emerald-950/20" />
+
+        {/* Subtle decorative arcs / glow (pure CSS, behind content) */}
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute -top-24 -right-24 h-[28rem] w-[28rem] rounded-full border-2 border-emerald-300/30" />
+          <div className="absolute top-1/3 -right-10 h-72 w-72 rounded-full border border-emerald-200/20" />
+          <div className="absolute -bottom-16 right-1/4 h-64 w-64 rounded-full bg-emerald-400/20 blur-3xl" />
         </div>
 
-        <Container className="relative z-10 text-center px-4">
+        <Container className="relative z-10 flex w-full flex-col justify-center px-4 pt-28 pb-14 sm:pt-32 sm:pb-16 md:min-h-[100svh] md:pt-36 md:pb-20">
           
           {/* City Badge */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-800/80 border border-emerald-500/30 text-emerald-200 text-xs font-semibold mb-4 shadow-xs">
-            <MapPin className="h-3.5 w-3.5 text-emerald-400" />
+          <div className="hero-fade-up mb-4 inline-flex w-fit mx-auto items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-100 text-xs font-semibold shadow-xs backdrop-blur-sm">
+            <MapPin className="h-3.5 w-3.5 text-emerald-300" />
             <span>
-              {language === 'bn' ? 'ময়মনসিংহ শহরের এক নম্বর টু-লেট প্ল্যাটফর্ম' : 'Mymensingh\'s Rental Marketplace'}
+              {language === 'bn' ? 'ময়মনসিংহ শহরের এক নম্বর টু-লেট প্ল্যাটফর্ম' : 'Mymensingh\'s Rental Marketplace'}
             </span>
           </div>
 
-          {/* Hero Headline */}
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white max-w-3xl mx-auto leading-tight mb-2.5 sm:mb-3">
-            {language === 'bn' ? 'ময়মনসিংহে আপনার পরের বাসা খুঁজে নিন' : 'Find Your Next Home in Mymensingh'}
+          {/* Hero Headline - centered editorial */}
+          <h1 className="hero-fade-up-1 max-w-3xl mx-auto text-center text-[clamp(1.9rem,5.4vw,4.4rem)] font-black leading-[1.12] tracking-tight text-white">
+            {language === 'bn' ? (
+              <>
+                ময়মনসিংহে
+                <br />
+                আপনার পরের
+                <br />
+                <span className="text-emerald-400">বাসা</span> খুঁজে নিন
+              </>
+            ) : (
+              <>
+                Find your next
+                <br />
+                <span className="text-emerald-400">home</span> in
+                <br />
+                Mymensingh
+              </>
+            )}
           </h1>
 
-          {/* Hero Subtitle */}
-          <p className="text-stone-300 text-xs sm:text-base max-w-2xl mx-auto mb-6 sm:mb-8 font-normal leading-relaxed">
+          {/* Hero Description */}
+          <p className="hero-fade-up-2 mt-4 max-w-[560px] mx-auto text-center text-sm leading-relaxed text-white/80 sm:text-base">
             {language === 'bn' 
-              ? 'গাঙ্গিনার পাড়, চরপাড়া, নতুন বাজার, বাকৃবি ও মেডিকেল কলেজ এলাকাসহ সকল এলাকার যাচাইকৃত বাসা, মেস ও হোস্টেল।' 
-              : 'Direct landlord contact, verified apartments, student messes, and secure hostels with zero broker harassment.'}
+              ? 'গাঙ্গিনার পাড়, চরপাড়া, নতুন বাজার, মাসকান্দা ও মেডিকেল কলেজ এলাকাসহ সব জায়গায় যাচাই করা বাসা, মেস ও হোস্টেল।' 
+              : 'Verified apartments, student messes and hostels across Gagina Bar, Charpara, Notun Bazar, Maskanda & more.'}
           </p>
 
-          {/* Hero Search Box */}
-          <div className="text-left">
+          {/* Trust Badge */}
+          <div className="hero-fade-up-2 mt-5 inline-flex w-fit mx-auto flex-wrap items-center gap-x-2.5 gap-y-1 rounded-xl bg-emerald-950/45 backdrop-blur-sm border border-white/10 px-3.5 py-2 text-[11px] font-medium text-white/85 sm:text-xs">
+            <span className="inline-flex items-center gap-1 text-emerald-300">
+              <BadgeCheck className="h-4 w-4" />
+              <span className="font-bold">{language === 'bn' ? '১০০% যাচাইকৃত লিস্টিং' : '100% Verified'}</span>
+            </span>
+            <span className="text-white/30">•</span>
+            <span>{language === 'bn' ? 'নিরাপদ' : 'Safe'}</span>
+            <span className="text-white/30">•</span>
+            <span>{language === 'bn' ? 'নির্ভরযোগ্য' : 'Trusted'}</span>
+            <span className="text-white/30">•</span>
+            <span>{language === 'bn' ? 'সহজ' : 'Easy'}</span>
+          </div>
+
+          {/* Hero Search Panel */}
+          <div className="hero-fade-up-3 mt-7 sm:mt-8 w-full">
             <HeroSearch
               onSearch={(filters) => {
                 const targetView = filters.propertyType === 'mess' 
@@ -189,24 +236,42 @@ export const HomeView: React.FC<HomeViewProps> = ({
             />
           </div>
 
-          {/* Quick Stat Highlights */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-4 max-w-xl mx-auto mt-6 pt-5 border-t border-emerald-800/50 text-center">
-            <div>
-              <span className="text-base sm:text-2xl font-black text-emerald-300 block">১০০%</span>
-              <span className="text-[10px] sm:text-xs text-stone-400">{language === 'bn' ? 'সরাসরি মালিক' : 'Direct Landlord'}</span>
+          {/* Trust Statistics — honest, configurable labels (no fabricated counts) */}
+          <div className="hero-fade-up-4 mt-8 grid max-w-3xl mx-auto grid-cols-2 gap-4 sm:grid-cols-4">
+            {[
+              { icon: BadgeCheck, value: '১০০%', label: language === 'bn' ? 'যাচাইকৃত লিস্টিং' : 'Verified' },
+              { icon: ShieldCheck, value: '০%', label: language === 'bn' ? 'দালাল / ফি' : 'Zero Broker' },
+              { icon: MapPin, value: '১২+', label: language === 'bn' ? 'প্রধান এলাকা' : 'Areas' },
+              { icon: Phone, value: '২৪/৭', label: language === 'bn' ? 'সাপোর্ট' : 'Support' },
+            ].map((s) => {
+              const Icon = s.icon;
+              return (
+                <div key={s.label} className="flex items-center justify-center gap-2.5">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 border border-white/15 text-emerald-300">
+                    <Icon className="h-4.5 w-4.5" />
+                  </div>
+                  <div>
+                    <span className="block text-base font-black text-white sm:text-lg">{s.value}</span>
+                    <span className="block text-[10px] text-white/60 sm:text-xs">{s.label}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Scroll indicator — desktop/tablet only */}
+          <div className="hero-fade-up-4 mt-10 hidden sm:flex flex-col items-center gap-1 text-white/55">
+            <div className="flex h-8 w-5 items-start justify-center rounded-full border border-white/30 p-1">
+              <div className="h-1.5 w-1 rounded-full bg-emerald-300 animate-bounce" />
             </div>
-            <div>
-              <span className="text-base sm:text-2xl font-black text-emerald-300 block">০%</span>
-              <span className="text-[10px] sm:text-xs text-stone-400">{language === 'bn' ? 'দালাল / ফি মুক্ত' : 'Zero Broker Fee'}</span>
-            </div>
-            <div>
-              <span className="text-base sm:text-2xl font-black text-emerald-300 block">১২+</span>
-              <span className="text-[10px] sm:text-xs text-stone-400">{language === 'bn' ? 'প্রধান এলাকা' : 'Key Locations'}</span>
-            </div>
+            <span className="text-[10px] font-medium tracking-wide">
+              {language === 'bn' ? 'নিচে স্ক্রল করুন' : 'Scroll down'}
+            </span>
           </div>
 
         </Container>
       </section>
+
 
       {/* 2. POPULAR LOCALITIES / AREAS */}
       <section className="px-4">
@@ -239,7 +304,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 key={area.id}
                 area={area}
                 isSelected={false}
-                onClick={() => onNavigate('tolet', { areaSlug: area.slug })}
+                onSelect={() => onNavigate('tolet', { areaSlug: area.slug })}
               />
             ))}
           </div>

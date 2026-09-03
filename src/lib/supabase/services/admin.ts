@@ -491,7 +491,8 @@ export async function fetchAdminListings(filters: {
       list = list.filter((l) => l.property_type === filters.property_type);
     }
     if (filters.area_id && filters.area_id !== 'all') {
-      list = list.filter((l) => l.area_id === filters.area_id || l.slug.includes(filters.area_id));
+      const areaId = String(filters.area_id);
+      list = list.filter((l) => l.area_id === areaId || (l.slug ?? '').includes(areaId));
     }
     if (filters.search && filters.search.trim()) {
       const q = filters.search.toLowerCase().trim();

@@ -526,7 +526,7 @@ export const ListingsFilterSidebar: React.FC<ListingsFilterSidebarProps> = ({
             {language === 'bn' ? 'রিসেট' : 'Reset'}
           </Button>
           <Button
-            variant="primary"
+            variant="default"
             onClick={onCloseMobileDrawer}
             className="flex-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl"
           >

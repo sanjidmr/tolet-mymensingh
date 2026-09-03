@@ -293,7 +293,7 @@ export const AdminUsersView: React.FC<AdminUsersViewProps> = ({ onNavigate }) =>
                   <Button
                     size="sm"
                     variant="outline"
-                    onClick={() => handleToggleVerify(user.id, user.is_verified)}
+                    onClick={() => handleToggleVerify(user.id, user.is_verified ?? false)}
                     disabled={isUpdating}
                     className={`h-8 px-2.5 rounded-xl text-xs font-bold ${
                       user.is_verified

@@ -605,7 +605,7 @@ export async function updateListing(
       images: updatedImages,
       amenity_ids: amenityIds ?? existing.amenity_ids,
       updated_at: new Date().toISOString(),
-    };
+    } as Listing;
     saveLocalCustomListings(localListings);
   }
 

@@ -1,11 +1,18 @@
 /**
  * Supabase Environment and Client Configuration
- * Safely accesses client-side environment variables and provides configuration health checks.
+ * Safely accesses environment variables and provides configuration health checks.
+ * Supports both VITE_ (legacy) and NEXT_PUBLIC_ (Next.js) prefixes.
  */
 
+function getEnv(key: string): string {
+  const val = (process.env[key] as string) || '';
+  return val;
+}
+
 export const SUPABASE_CONFIG = {
-  url: (import.meta.env.VITE_SUPABASE_URL as string) || '',
-  anonKey: (import.meta.env.VITE_SUPABASE_ANON_KEY as string) || '',
+  url: getEnv('NEXT_PUBLIC_SUPABASE_URL') || getEnv('VITE_SUPABASE_URL') || '',
+  anonKey:
+    getEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY') || getEnv('VITE_SUPABASE_ANON_KEY') || '',
 };
 
 /**
